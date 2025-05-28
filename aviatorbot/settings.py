@@ -9,7 +9,7 @@ SECRET_KEY = 'django-insecure-aviatorbot-secret-key'
 
 DEBUG = True
 
-ALLOWED_HOSTS = [https://aviatorweb.onrender.com]  # À restreindre en production
+ALLOWED_HOSTS = ['aviatorweb.onrender.com']  # À restreindre en production
 
 # Applications installées
 INSTALLED_APPS = [
