@@ -3,3 +3,4 @@ python-telegram-bot==20.7
 asgiref>=3.6.0
 sqlparse>=0.4.4
 tzdata
+gunicorn
