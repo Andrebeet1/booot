@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: AviatorWeb
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn aviatorbot.wsgi
+    plan: free
+    autoDeploy: true
+
+  - type: worker
+    name: AviatorBot
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python bot/bot.py
+    plan: free

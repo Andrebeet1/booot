@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard - AviatorBot</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+  <div class="container">
+    <a class="navbar-brand" href="#">✈️ AviatorBot</a>
+    <div>
+      <a class="btn btn-outline-light me-2" href="{% url 'leaderboard' %}">Classement</a>
+      <a class="btn btn-outline-light" href="{% url 'historique' %}">Historique</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+    <h3 class="mb-3">Bienvenue, {{ joueur.user.username }} 👋</h3>
+
+    <div class="card mb-4">
+        <div class="card-body text-center">
+            <h4>💰 Solde : <span class="text-success">{{ joueur.solde }} F</span></h4>
+        </div>
+    </div>
+
+    <h5>🕹️ Dernières Parties</h5>
+    {% if parties %}
+    <table class="table table-striped table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>Date</th>
+                <th>Mise</th>
+                <th>Multiplicateur</th>
+                <th>Gain</th>
+                <th>Retiré à temps</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for partie in parties %}
+            <tr>
+                <td>{{ partie.date|date:"d/m/Y H:i" }}</td>
+                <td>{{ partie.mise }} F</td>
+                <td>x{{ partie.multiplicateur }}</td>
+                <td>{{ partie.gain }} F</td>
+                <td>
+                    {% if partie.retire_avant_crash %}
+                        ✅
+                    {% else %}
+                        ❌
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p>Aucune partie jouée pour le moment.</p>
+    {% endif %}
+</div>
+
+</body>
+</html>
