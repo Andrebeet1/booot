@@ -19,8 +19,7 @@ from handlers import (
 )
 
 # 🔐 Ton token Telegram
-TELEGRAM_BOT_TOKEN = 'TON_TOKEN_TELEGRAM'
-
+TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 # 🛠️ Logger
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
