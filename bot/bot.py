@@ -1,7 +1,7 @@
 import os
 import django
 import logging
-
+import asyncio
 from telegram.ext import (
     ApplicationBuilder,
     CommandHandler,
@@ -18,15 +18,17 @@ from handlers import (
     register_handlers
 )
 
-# 🔐 Ton token Telegram
+# 🔐 Ton token Telegram depuis l'environnement
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
+
 # 🛠️ Logger
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     level=logging.INFO
 )
 
-def main():
+# ✅ Fonction asynchrone
+async def main():
     # Créer l'application Telegram
     app = ApplicationBuilder().token(TELEGRAM_BOT_TOKEN).build()
 
@@ -37,9 +39,9 @@ def main():
     # Gestion des boutons (callback data)
     register_handlers(app)
 
-    # Lancer le bot
     print("✅ AviatorBot est en ligne et prêt à jouer !")
-    app.run_polling()
+    await app.run_polling()
 
+# ▶️ Lancer la boucle
 if __name__ == '__main__':
-    main()
+    asyncio.run(main())
